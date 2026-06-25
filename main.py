@@ -14,6 +14,7 @@ def main(page: ft.Page):
     page.spacing = 0
     selected_index = 0
     video_url = None
+    running = False
     stories = []
     explore_tab = "découvrir"
     publications = [
@@ -875,11 +876,12 @@ Ce portrait capture la confiance d’être soi-même, avec élégance, naturel e
                 weight=ft.FontWeight.BOLD,
             ),
             ft.Row(
-                scroll=ft.ScrollMode.AUTO,
+                scroll=ft.ScrollMode.HIDDEN,
+                #scroll=ft.ScrollMode.AUTO,
                 spacing=10,
                 controls=[
                     ft.Container(
-                        width=300,
+                        #width=300,
                         height=160,
                         border_radius=20,
                         clip_behavior=ft.ClipBehavior.ANTI_ALIAS,
@@ -931,14 +933,13 @@ Ce portrait capture la confiance d’être soi-même, avec élégance, naturel e
         ],
         )
         creator_grid = ft.Row(
-        scroll=ft.ScrollMode.AUTO,
+        scroll=ft.ScrollMode.HIDDEN,
         spacing=12,
         controls=[creator_card(c) for c in decouvrir_data],
         )
         return ft.Column(
         expand=True,
         scroll=ft.ScrollMode.HIDDEN,
-        #scroll=ft.ScrollMode.AUTO,
         spacing=15,
         controls=[
 
@@ -1224,8 +1225,14 @@ Ce portrait capture la confiance d’être soi-même, avec élégance, naturel e
             ]
         )
     )
+    def view_pop(e):
+        nonlocal running
+        running = False
+        if page.views:
+            page.views.pop()
+        page.go("/")
     page.on_route_change = route_change
-    #page.on_view_pop = view_pop
+    page.on_view_pop = view_pop
     contenu = ft.Container(expand=True, content=page_accueil())
     page.add(contenu)
 ft.app(target=main)
