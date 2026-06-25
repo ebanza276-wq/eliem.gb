@@ -147,6 +147,111 @@ Il y a des personnes qui n’ont pas besoin de parler fort pour être remarquée
             "comments":20,
             "shares":10,
         },
+        {   "etat":0,
+            "id":4,
+            "creator_nom":"bella",
+            "avatar":"https://picsum.photos/id/74/200/200",
+            "contenu":"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500",
+            "description": """
+Il y a des personnes qui n’ont pas besoin de parler fort pour être remarquées. Leur présence suffit. Entre douceur et confiance, ce portrait capture un instant simple mais puissant, celui où l’on est pleinement soi-même, sans filtre ni artifice. ✨ 
+            #portrait #naturel #beauté #authenticité #lifestyle #confidence #photography
+""",
+            "profil":[
+                {
+                    "nom":"Alice Martin",
+                    "avatar":"https://i.pravatar.cc/100?img=1",
+                    "contenu":"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500",
+                    "description":"Motivation 💪🔥",
+                    "likes":12,
+                    "comments":20,
+                    "shares":10,
+                },
+                {
+                    "nom":"Alice Martin",
+                    "avatar":"https://i.pravatar.cc/100?img=1",
+                    "contenu":"https://picsum.photos/1080/1080?4",
+                    "description":"Motivation 💪🔥",
+                    "likes":12,
+                    "comments":20,
+                    "shares":10,
+                },
+            ],
+            "likes":12,
+            "comments":20,
+            "shares":10,
+        },
+        {   "etat":0,
+            "id":4,
+            "creator_nom":"Luna",
+            "avatar":"https://picsum.photos/id/74/200/200",
+            "contenu":"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500",
+            "description": """
+✨ La beauté se trouve souvent dans les moments les plus simples. Un regard, une émotion, une énergie unique qui raconte une histoire sans avoir besoin de mots. 🌸
+
+Ce portrait capture la confiance d’être soi-même, avec élégance, naturel et authenticité. Chaque personne possède une lumière qui mérite d’être révélée. 🤍
+
+#portrait #élégance #naturel #beauté #authenticité #confiance #lifestyle #photography #inspiration #femininity
+""",
+            "profil":[
+                {
+                    "nom":"Alice Martin",
+                    "avatar":"https://i.pravatar.cc/100?img=1",
+                    "contenu":"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500",
+                    "description":"Motivation 💪🔥",
+                    "likes":12,
+                    "comments":20,
+                    "shares":10,
+                },
+                {
+                    "nom":"Alice Martin",
+                    "avatar":"https://i.pravatar.cc/100?img=1",
+                    "contenu":"https://picsum.photos/1080/1080?4",
+                    "description":"Motivation 💪🔥",
+                    "likes":12,
+                    "comments":20,
+                    "shares":10,
+                },
+            ],
+            "likes":12,
+            "comments":20,
+            "shares":10,
+        },
+        {   "etat":0,
+            "id":5,
+            "creator_nom":"Maya",
+            "avatar":"https://picsum.photos/id/74/200/200",
+            "contenu":"https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500",
+            "description": """
+✨ Parfois, la plus belle version de soi est simplement celle qui ne cherche pas à impressionner. Un regard sincère, un sourire discret et une confiance qui se reflète naturellement. Chaque instant raconte une histoire, chaque expression révèle une part d’authenticité. 🌿📸
+
+Être soi-même reste la plus grande des forces. 💫
+
+#portrait #authenticité #naturel #beauté #confianceensoi #lifestyle #photographie #inspiration #selflove #positivevibes
+""",
+            "profil":[
+                {
+                    "nom":"Alice Martin",
+                    "avatar":"https://i.pravatar.cc/100?img=1",
+                    "contenu":"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500",
+                    "description":"Motivation 💪🔥",
+                    "likes":12,
+                    "comments":20,
+                    "shares":10,
+                },
+                {
+                    "nom":"Alice Martin",
+                    "avatar":"https://i.pravatar.cc/100?img=1",
+                    "contenu":"https://picsum.photos/1080/1080?4",
+                    "description":"Motivation 💪🔥",
+                    "likes":12,
+                    "comments":20,
+                    "shares":10,
+                },
+            ],
+            "likes":12,
+            "comments":20,
+            "shares":10,
+        },
     ]
     videos = [
         {"creator_nom": "Bianca Herrera", "contenu": "https://www.w3schools.com/html/mov_bbb.mp4", "likes": "36.6K", "medias": "104", "videos": "9"},
@@ -510,7 +615,7 @@ Il y a des personnes qui n’ont pas besoin de parler fort pour être remarquée
             )
         ]
     )
-    posts_column = ft.Column(scroll="auto")
+    posts_column = ft.Column(scroll=ft.ScrollMode.HIDDEN)
     def page_accueil():
         if stories:
             section_stories = ft.Container(
@@ -832,7 +937,8 @@ Il y a des personnes qui n’ont pas besoin de parler fort pour être remarquée
         )
         return ft.Column(
         expand=True,
-        scroll=ft.ScrollMode.AUTO,
+        scroll=ft.ScrollMode.HIDDEN,
+        #scroll=ft.ScrollMode.AUTO,
         spacing=15,
         controls=[
 
@@ -974,6 +1080,7 @@ Il y a des personnes qui n’ont pas besoin de parler fort pour être remarquée
         expand=True,
         content=ft.Column(
             spacing=15,
+            scroll=ft.ScrollMode.HIDDEN,
             controls=[
                 ft.Text(
                     "Recherche",
@@ -994,7 +1101,7 @@ Il y a des personnes qui n’ont pas besoin de parler fort pour être remarquée
                     hint_style=ft.TextStyle(color="#888888"),
                     filled=True,
                     content_padding=15,
-                    width=float("inf"),
+                    expand=True,
                 ),
 
                 ft.Container(height=10),
@@ -1011,7 +1118,7 @@ Il y a des personnes qui n’ont pas besoin de parler fort pour être remarquée
                         ft.TextButton(
                             "Tout voir",
                             style=ft.ButtonStyle(
-                                color="#00BFFF"
+                                color="#00BFFF",
                             ),
                         ),
                     ],
@@ -1028,17 +1135,6 @@ Il y a des personnes qui n’ont pas besoin de parler fort pour être remarquée
                     ],
                 ),
 
-                ft.Container(height=10),
-
-                ft.FilledButton(
-                    "Voir plus",
-                    width=float("inf"),
-                    style=ft.ButtonStyle(
-                        bgcolor="#2A2A2A",
-                        color="white",
-                        shape=ft.RoundedRectangleBorder(radius=12),
-                    ),
-                ),
             ],
         ),
     )
@@ -1102,7 +1198,7 @@ Il y a des personnes qui n’ont pas besoin de parler fort pour être remarquée
         ],
         alignment=ft.MainAxisAlignment.SPACE_AROUND,
     ),
-    padding=ft.Padding.only(top=10, bottom=20),
+    padding=ft.Padding.only(top=10, bottom=12),
     bgcolor="#121212",
     border=ft.Border.only(
         top=ft.BorderSide(1, "#222222")
