@@ -208,7 +208,42 @@ Il y a des personnes qui n’ont pas besoin de parler fort pour être remarquée
                 ft.TextSpan(text=mot + " ", style=ft.TextStyle(color=color))
             )
         return ft.Text(spans=spans)
-    
+    def item_recent(user):
+        return ft.Container(
+        padding=12,
+        border_radius=12,
+        bgcolor="#1E1E1E",
+        content=ft.Row(
+            controls=[
+                ft.CircleAvatar(
+                    radius=22,
+                    foreground_image_src=user["avatar"],
+                ),
+
+                ft.Column(
+                    spacing=2,
+                    expand=True,
+                    controls=[
+                        ft.Text(
+                            user["nom"],
+                            color="white",
+                            weight=ft.FontWeight.W_600,
+                        ),
+                        ft.Text(
+                            f"@{user['username']}",
+                            color="grey",
+                            size=12,
+                        ),
+                    ],
+                ),
+
+                ft.Icon(
+                    ft.Icons.CHEVRON_RIGHT,
+                    color="grey",
+                ),
+            ],
+        ),
+    )
     def video_preview(url):
         def play_video(e):
             nonlocal video_url
@@ -885,7 +920,6 @@ Il y a des personnes qui n’ont pas besoin de parler fort pour être remarquée
                                 autoplay=True,
                                 expand=True,
                                 show_controls=False,
-                                aspect_ratio=9/16,
                             ),
                             # Dégradé supérieur pour masquer la barre d'onglets proprement
                             ft.Container(
@@ -936,32 +970,78 @@ Il y a des personnes qui n’ont pas besoin de parler fort pour être remarquée
         )
     def view_rechercher():
         return ft.Container(
-            content=ft.Column(
-                controls=[
-                    ft.TextField(
-                        hint_text="Rechercher des créateurs...",
-                        hint_style=ft.TextStyle(color="grey600"),
-                        prefix_icon=ft.Icons.SEARCH,
-                        bgcolor="#1A1A1A",
-                        border_radius=14,
-                        border_color=ft.Colors.TRANSPARENT,
-                        focused_border_color="grey700",
-                        filled=True,
-                        content_padding=12
+        padding=20,
+        expand=True,
+        content=ft.Column(
+            spacing=15,
+            controls=[
+                ft.Text(
+                    "Recherche",
+                    size=24,
+                    weight=ft.FontWeight.BOLD,
+                    color="white",
+                ),
+
+                ft.TextField(
+                    hint_text="Rechercher des créateurs...",
+                    prefix_icon=ft.Icons.SEARCH,
+                    bgcolor="#1E1E1E",
+                    border_radius=20,
+                    border_color=ft.Colors.TRANSPARENT,
+                    focused_border_color="#3A3A3A",
+                    cursor_color="white",
+                    text_style=ft.TextStyle(color="white"),
+                    hint_style=ft.TextStyle(color="#888888"),
+                    filled=True,
+                    content_padding=15,
+                    width=float("inf"),
+                ),
+
+                ft.Container(height=10),
+
+                ft.Row(
+                    alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                    controls=[
+                        ft.Text(
+                            "Récemment consultés",
+                            color="white",
+                            size=16,
+                            weight=ft.FontWeight.BOLD,
+                        ),
+                        ft.TextButton(
+                            "Tout voir",
+                            style=ft.ButtonStyle(
+                                color="#00BFFF"
+                            ),
+                        ),
+                    ],
+                ),
+
+                ft.Divider(color="#2A2A2A", height=1),
+
+                # Liste des créateurs récents
+                ft.Column(
+                    spacing=10,
+                    controls=[
+                        item_recent(u)
+                        for u in historique_recherche
+                    ],
+                ),
+
+                ft.Container(height=10),
+
+                ft.FilledButton(
+                    "Voir plus",
+                    width=float("inf"),
+                    style=ft.ButtonStyle(
+                        bgcolor="#2A2A2A",
+                        color="white",
+                        shape=ft.RoundedRectangleBorder(radius=12),
                     ),
-                    ft.Container(height=20),
-                    ft.Text("Récemment consultés", color="white", size=15, weight="bold"),
-                    ft.Container(height=5),
-                    #ft.Column(controls=[item_recent(u) for u in historique_recherche]),
-                    ft.Container(height=15),
-                    ft.TextButton(
-                        content=ft.Text("Voir plus", color="white", weight="bold", size=15),
-                        style=ft.ButtonStyle(alignment=ft.Alignment.CENTER),
-                        width=360
-                    )
-                ]
-            )
-        )
+                ),
+            ],
+        ),
+    )
     def page_explore():
         if explore_tab == "découvrir":
            sub_content = view_decouvrir()
@@ -1043,7 +1123,6 @@ Il y a des personnes qui n’ont pas besoin de parler fort pour être remarquée
                     ],
                     autoplay=True,
                     expand=True,
-                    aspect_ratio=9/16,
                     show_controls=True
                 )
             ]
